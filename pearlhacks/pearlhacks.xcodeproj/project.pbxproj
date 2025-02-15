@@ -195,6 +195,9 @@
 			);
 			mainGroup = F867AC272D61171A002342F6;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				C799EF8A2D61406A00F2DE78 /* XCRemoteSwiftPackageReference "plaid-link-ios" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = F867AC312D61171A002342F6 /* Products */;
 			projectDirPath = "";
@@ -558,6 +561,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C799EF8A2D61406A00F2DE78 /* XCRemoteSwiftPackageReference "plaid-link-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/plaid/plaid-link-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.4;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = F867AC282D61171A002342F6 /* Project object */;
 }
