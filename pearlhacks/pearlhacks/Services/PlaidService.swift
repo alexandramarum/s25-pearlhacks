@@ -4,15 +4,17 @@
 //  Created by Alexandra Marum on 2/15/25.
 //
 
-import SwiftUI
 import LinkKit
+import SwiftUI
 
 struct PlaidLoginView: View {
     // MARK: - Bindings
+
     @Binding var state: AppState
     @Binding var profile: Profile
 
     // MARK: - Local State Variables
+
     @State private var username: String = ""
     @State private var password: String = ""
     
@@ -41,6 +43,7 @@ struct PlaidLoginView: View {
     @State private var showRegisterSheet = false
 
     // MARK: - Body
+
     var body: some View {
         VStack {
             if userToken == nil {
@@ -55,7 +58,7 @@ struct PlaidLoginView: View {
                 Text("Login")
                     .font(.title2)
                     .foregroundColor(Color.accentColor).opacity(0.8)
-                    //.padding()
+                // .padding()
                 TextField("Username", text: $username)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
@@ -95,7 +98,7 @@ struct PlaidLoginView: View {
                         }
                     }
             } else if plaidAccessToken == nil {
-                // User is logged in and link token exists, but bank hasn't been connected yet.
+                // User is logged in and link tokenexists, but bank hasn't been connected yet.
                 VStack {
                     Image(.nest)
                         .resizable()
@@ -116,9 +119,7 @@ struct PlaidLoginView: View {
                     .onAppear {
                         fetchAllFinancialData()
                         // Delay setting onboarded state to allow fetches to complete
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                            state = .onboarded
-                        }
+                        state = .onboarded
                     }
             }
         }
@@ -126,8 +127,9 @@ struct PlaidLoginView: View {
     }
     
     // MARK: - Helper: Update the bound profile with local state values
+
     func updateProfileBinding() {
-        self.profile = Profile(
+        profile = Profile(
             username: username,
             balance: balance,
             creditCardDebt: creditCardDebt,
@@ -142,7 +144,8 @@ struct PlaidLoginView: View {
 
     func getSecret(_ key: String) -> String? {
         if let path = Bundle.main.path(forResource: "Secrets", ofType: "plist"),
-           let dict = NSDictionary(contentsOfFile: path) as? [String: Any] {
+           let dict = NSDictionary(contentsOfFile: path) as? [String: Any]
+        {
             return dict[key] as? String
         }
         return nil
@@ -184,8 +187,8 @@ struct PlaidLoginView: View {
             
             // Try to parse JSON
             if let response = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
-               let token = response["access_token"] as? String {
-                
+               let token = response["access_token"] as? String
+            {
                 print("Login success, got token:", token)
                 DispatchQueue.main.async {
                     self.userToken = token
@@ -198,7 +201,6 @@ struct PlaidLoginView: View {
         }.resume()
     }
     
-    /// Step 2: Fetch Plaid Link Token using the userToken.
     func fetchLinkToken(userToken: String) {
         let url = URL(string: "http://107.23.249.230:5000/create_link_token?token=\(userToken)")!
         var request = URLRequest(url: url)
@@ -229,8 +231,8 @@ struct PlaidLoginView: View {
             
             // Try to parse JSON
             if let response = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
-               let token = response["link_token"] as? String {
-                
+               let token = response["link_token"] as? String
+            {
                 print("Got link token:", token)
                 DispatchQueue.main.async {
                     self.linkToken = token
@@ -241,7 +243,7 @@ struct PlaidLoginView: View {
         }.resume()
     }
     
-    /// Step 3: Open Plaid Link UI.
+
     func openPlaidLink() {
         guard let linkToken = linkToken else {
             print("No link token available, cannot open Plaid Link")
@@ -260,13 +262,13 @@ struct PlaidLoginView: View {
         case .success(let handler):
             self.handler = handler
             if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-               let rootViewController = scene.windows.first?.rootViewController {
+               let rootViewController = scene.windows.first?.rootViewController
+            {
                 handler.open(presentUsing: .viewController(rootViewController))
             }
         }
     }
     
-    /// Step 4: Exchange Plaid public token for the Plaid access token.
     func exchangePublicToken(publicToken: String) {
         guard let url = URL(string: "http://107.23.249.230:5000/exchange_public_token?public_token=\(publicToken)&username=\(username)") else {
             print("Failed to build exchange_public_token URL")
@@ -299,11 +301,12 @@ struct PlaidLoginView: View {
             }
             
             if let response = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
-               let plaidToken = response["access_token"] as? String {
-                
+               let plaidToken = response["access_token"] as? String
+            {
                 print("Got Plaid access token:", plaidToken)
                 DispatchQueue.main.async {
                     self.plaidAccessToken = plaidToken
+                    print(plaidAccessToken)
                 }
             } else {
                 print("Failed to parse JSON or no access_token found")
@@ -313,13 +316,11 @@ struct PlaidLoginView: View {
     
     // MARK: - Financial Data Fetching
 
-    /// Step 5: Fetch all financial data from Plaid.
     func fetchAllFinancialData() {
         fetchBalance()
         fetchLiabilities()
     }
 
-    /// Fetch account balance.
     func fetchBalance() {
         guard let plaidAccessToken = plaidAccessToken else { return }
         let url = URL(string: "https://sandbox.plaid.com/accounts/balance/get")!
@@ -340,7 +341,8 @@ struct PlaidLoginView: View {
                 return
             }
             if let accountsResponse = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
-               let accounts = accountsResponse["accounts"] as? [[String: Any]] {
+               let accounts = accountsResponse["accounts"] as? [[String: Any]]
+            {
                 DispatchQueue.main.async {
                     let totalBalance = accounts.compactMap { $0["balances"] as? [String: Any] }
                         .compactMap { $0["available"] as? Double }
@@ -355,7 +357,6 @@ struct PlaidLoginView: View {
         }.resume()
     }
     
-    /// Fetch liabilities (debt).
     func fetchLiabilities() {
         guard let plaidAccessToken = plaidAccessToken else { return }
         let url = URL(string: "https://sandbox.plaid.com/liabilities/get")!
@@ -376,7 +377,8 @@ struct PlaidLoginView: View {
                 return
             }
             if let response = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
-               let liabilities = response["liabilities"] as? [String: Any] {
+               let liabilities = response["liabilities"] as? [String: Any]
+            {
                 DispatchQueue.main.async {
                     let totalCreditCardDebt = (liabilities["credit"] as? [[String: Any]])?.reduce(0) {
                         $0 + ($1["last_statement_balance"] as? Double ?? 0)

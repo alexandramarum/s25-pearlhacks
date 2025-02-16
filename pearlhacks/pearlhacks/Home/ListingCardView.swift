@@ -22,14 +22,14 @@ struct ListingCardView: View {
                         Text("$" + listing.price.description)
                             .font(.largeTitle)
                             .bold()
-                        if vm.hasBadge(for: listing, profile: profile) {
+                        if listing.hasBadge {
                             Image(systemName: "checkmark.seal.fill")
                                 .foregroundColor(Color.accent)
                                 .font(.title2)
                         }
                     }
                     Text("\(listing.street ?? "No street"), \(listing.town ?? "No town")")
-//                    Text("$" + listing.mortgage.description + "/mo")
+                    Text("$" + listing.mortgage.description + "/mo")
                 }
                 Spacer()
             }
@@ -64,6 +64,9 @@ struct ListingCardView: View {
             if showDetails {
                 showDetailsView(listing: listing)
             }
+        }
+        .onAppear {
+            listing = vm.hasBadge(for: listing, profile: profile)
         }
         .background(Color.white
             .shadow(color: Color.gray.opacity(0.5), radius: 5)

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct Filtered: Equatable {
     var min: Int = 0
@@ -16,13 +17,20 @@ struct Filtered: Equatable {
 
 @Observable
 class ListingViewModel {
-    //    var listings: [Listing] = []
-    var listings: [Listing] = []
+    var listings: [Listing] = Listing.examples
     let images: [String] = ["image1", "image3", "image4", "image5", "image6", "image7", "image8", "image9", "image10"]
     var filteredListings: [Listing] = []
     
     var filterSettings: Filtered = .init()
     var filterOn: Bool = false
+    
+    func getListingBinding(by id: UUID) -> Binding<Listing>? {
+        guard let index = listings.firstIndex(where: { $0.id == id }) else {
+            return nil
+        }
+        return Binding(get: { self.listings[index] },
+                       set: { self.listings[index] = $0 })
+    }
     
     func getListings(zip: Int) throws {
         var properties: [Property] = []
@@ -49,19 +57,33 @@ class ListingViewModel {
     }
     
     func applyFilters() {
-        // Step 1: Apply filter settings if filter is on
-        // 1. Apply price range filter
-//        filteredListings = listings.filter { listing in
-//            return listing.hasBadge
+        filteredListings = listings
+        if filterSettings.eligibleListings && filterSettings.savedListings {
+            filteredListings = listings.filter { listing in
+                listing.isSaved && listing.hasBadge
+            }
+        } else if filterSettings.eligibleListings {
+            filteredListings = listings.filter { listing in
+                listing.hasBadge
+            }
+        } else if filterSettings.savedListings {
+            filteredListings = listings.filter { listing in
+                listing.isSaved
+            }
+        }
+//        if filterSettings.eligibleListings { filteredListings = listings.filter { listing in
+//            listing.hasBadge
 //        }
-        filteredListings = listings.filter { listing in
-            let price = listing.price
-            return price >= filterSettings.min && price <= filterSettings.max
-        }
-        // 2. Apply "saved listings" filter if enabled
-        filteredListings = filteredListings.filter { listing in
-            !filterSettings.savedListings || listing.isSaved
-        }
+//        filteredListings = listings.filter { listing in
+//            let price = listing.price
+//            return price >= filterSettings.min && price <= filterSettings.max
+//        }
+//        if filterSettings.savedListings {
+//            filteredListings = filteredListings.filter { listing in
+//                listing.isSaved
+//            }
+//        }
+//        }
     }
         
     func generateRandomListing() -> RandomListing {
@@ -76,9 +98,7 @@ class ListingViewModel {
         return RandomListing(image: images.randomElement()!, price: listingPrice, mortgage: mortgage, bathsfull: bathsfull, bathspartial: bathspartial, bathstotal: bathstotal, beds: beds, rooms: rooms)
     }
         
-    // Mortgage calculation based on listing price (simplified formula)
     func calculateMortgage(price: Int) -> Int {
-        // Mortgage is calculated with a fixed rate, e.g., 3% annual rate, for a 30-year loan
         let interestRate = 0.03
         let loanTermInYears = 30
         let principal = Double(price)
@@ -86,6 +106,6 @@ class ListingViewModel {
         let numberOfPayments = loanTermInYears * 12
             
         let mortgage = principal * monthlyInterestRate / (1 - pow(1 + monthlyInterestRate, -Double(numberOfPayments)))
-        return Int(mortgage * 12) // Yearly mortgage payment
+        return Int(mortgage * 12)
     }
 }

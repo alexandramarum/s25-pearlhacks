@@ -18,7 +18,7 @@ extension Profile {
         mortgageDebt: "$300.00",
         studentLoanDebt: "$400.00",
         debt: "$900.00",
-        maxLoanApproval: "$1,000"
+        maxLoanApproval: "$5,000"
         )
 }
 

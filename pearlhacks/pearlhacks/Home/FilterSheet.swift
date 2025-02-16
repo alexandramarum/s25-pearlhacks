@@ -46,9 +46,12 @@ struct FilterSheet: View {
             .foregroundStyle(vm.filterOn ? .primary :.secondary)
             .disabled(!vm.filterOn)
         }
-        .onChange(of: vm.filterSettings) {
+        .onDisappear {
             vm.applyFilters()
         }
+//        .onChange(of: vm.filterSettings) {
+//            vm.applyFilters()
+//        }
     }
 }
 

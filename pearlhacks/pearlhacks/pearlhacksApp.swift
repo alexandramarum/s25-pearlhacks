@@ -11,7 +11,7 @@ import SwiftUI
 struct pearlhacksApp: App {
     var body: some Scene {
         WindowGroup {
-            LoadingView()
+            ContentView()
         }
     }
 }
