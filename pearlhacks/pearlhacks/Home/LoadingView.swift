@@ -30,7 +30,7 @@ struct LoadingView: View {
                     // 3) Progress bar
                     ProgressView(value: Double(progress), total: 1.0)
                         .progressViewStyle(LinearProgressViewStyle())
-                        .tint(.yellow) // Make the progress bar white
+                        .tint(.white) // Make the progress bar white
                         .scaleEffect(x: 1, y: 2, anchor: .center) // Thicker bar
                         .padding(.horizontal, 40)
                         .animation(.easeInOut(duration: 10), value: progress)

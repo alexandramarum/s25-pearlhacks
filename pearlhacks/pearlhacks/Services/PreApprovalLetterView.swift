@@ -15,7 +15,7 @@ struct PreApprovalLetterView: View {
         // ScrollView {
         VStack(alignment: .leading, spacing: 10) {
             // Title
-            Text("BANK")
+            Text("NEST")
                 .foregroundColor(Color("AppGreen"))
                 .bold()
                 .font(.title3) +
@@ -33,7 +33,7 @@ struct PreApprovalLetterView: View {
             VStack(alignment: .leading, spacing: 2) {
                 Text("From: ")
                     .bold() +
-                    Text("ABC Mortgage Company")
+                    Text("NEST Mortgage Approval Service")
                     .foregroundColor(Color("AppGreen"))
                        
                 Text("Address: 145 E. Cameron Street")
@@ -105,13 +105,13 @@ struct PreApprovalLetterView: View {
             Text("Sincerely,")
                 .padding(.top)
                    
-            Text("Angela Yang")
+            Text("Bob Frank")
                 .foregroundColor(Color("AppGreen"))
                 .bold()
                 .underline()
                    
-            Text("Peter Johnson, Loan Officer")
-            Text("ABC Mortgage Company")
+            Text("Bob Frank, Loan Officer")
+            Text("NEST Mortgage Approval Service")
                 .foregroundColor(Color("AppGreen"))
                    
             Spacer()
