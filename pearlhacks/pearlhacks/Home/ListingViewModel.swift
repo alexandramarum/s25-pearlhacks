@@ -17,7 +17,7 @@ struct Filtered: Equatable {
 @Observable
 class ListingViewModel {
     //    var listings: [Listing] = []
-    var listings: [Listing] = Listing.examples
+    var listings: [Listing] = []
     let images: [String] = ["image1", "image3", "image4", "image5", "image6", "image7", "image8", "image9", "image10"]
     var filteredListings: [Listing] = []
     
@@ -51,6 +51,9 @@ class ListingViewModel {
     func applyFilters() {
         // Step 1: Apply filter settings if filter is on
         // 1. Apply price range filter
+//        filteredListings = listings.filter { listing in
+//            return listing.hasBadge
+//        }
         filteredListings = listings.filter { listing in
             let price = listing.price
             return price >= filterSettings.min && price <= filterSettings.max

@@ -25,7 +25,7 @@ struct ContentView: View {
                     ProfileView(profile: profile)
                 }
                 Tab("Listings", systemImage: "house") {
-                    ListingView()
+                    ListingView(profile: profile)
                 }
             }
             .onAppear {

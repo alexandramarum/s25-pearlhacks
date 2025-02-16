@@ -11,27 +11,26 @@ struct ListingView: View {
     @State var vm: ListingViewModel = .init() // Use @StateObject to create a single instance of ViewModel
     @State var searchText: String = ""
     @State private var isFilterPresented = false
+    let profile: Profile
     
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack {
-            // Use filteredListings if filtering is on or if searchText is not empty
                     var listings = vm.filterOn ? vm.filteredListings : vm.listings
                     
                     ForEach(listings.indices, id: \.self) { index in
-                        ListingCardView(listing: $vm.listings[index]) // Use correct listings array
+                        ListingCardView(listing: $vm.listings[index], profile: profile)
                     }
                 }
             }
             .onAppear {
-                // Fetch listings when the view appears
                 Task {
-//                    do {
-//                        try await vm.getListings(zip: 27707)
-//                    } catch {
-//                        print("Cannot get listings: \(error)")
-//                    }
+                    do {
+                        try await vm.getListings(zip: 27516)
+                    } catch {
+                        print("Cannot get listings: \(error)")
+                    }
                 }
             }
             .toolbar {
@@ -53,5 +52,5 @@ struct ListingView: View {
 }
 
 #Preview {
-    ListingView()
+    ListingView(profile: Profile.example)
 }
