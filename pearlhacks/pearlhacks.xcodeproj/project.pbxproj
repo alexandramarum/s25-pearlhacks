@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C799EF8D2D61466600F2DE78 /* LinkKit in Frameworks */ = {isa = PBXBuildFile; productRef = C799EF8C2D61466600F2DE78 /* LinkKit */; };
+		C79552B22D6185BE00B7F74B /* LinkKit in Frameworks */ = {isa = PBXBuildFile; productRef = C79552B12D6185BE00B7F74B /* LinkKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,9 +33,22 @@
 		F867AC4A2D61171D002342F6 /* pearlhacksUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = pearlhacksUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		C79552B42D618B9100B7F74B /* Exceptions for "pearlhacks" folder in "pearlhacks" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = F867AC2F2D61171A002342F6 /* pearlhacks */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		F867AC322D61171A002342F6 /* pearlhacks */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				C79552B42D618B9100B7F74B /* Exceptions for "pearlhacks" folder in "pearlhacks" target */,
+			);
 			path = pearlhacks;
 			sourceTree = "<group>";
 		};
@@ -56,7 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C799EF8D2D61466600F2DE78 /* LinkKit in Frameworks */,
+				C79552B22D6185BE00B7F74B /* LinkKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,7 +138,7 @@
 			);
 			name = pearlhacks;
 			packageProductDependencies = (
-				C799EF8C2D61466600F2DE78 /* LinkKit */,
+				C79552B12D6185BE00B7F74B /* LinkKit */,
 			);
 			productName = pearlhacks;
 			productReference = F867AC302D61171A002342F6 /* pearlhacks.app */;
@@ -210,7 +223,7 @@
 			mainGroup = F867AC272D61171A002342F6;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				C799EF8A2D61406A00F2DE78 /* XCRemoteSwiftPackageReference "plaid-link-ios" */,
+				C79552B02D6185A200B7F74B /* XCRemoteSwiftPackageReference "plaid-link-ios-spm" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = F867AC312D61171A002342F6 /* Products */;
@@ -416,6 +429,8 @@
 				DEVELOPMENT_TEAM = F96K8QGHZR;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = pearlhacks/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -445,6 +460,8 @@
 				DEVELOPMENT_TEAM = F96K8QGHZR;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = pearlhacks/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -577,9 +594,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		C799EF8A2D61406A00F2DE78 /* XCRemoteSwiftPackageReference "plaid-link-ios" */ = {
+		C79552B02D6185A200B7F74B /* XCRemoteSwiftPackageReference "plaid-link-ios-spm" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/plaid/plaid-link-ios";
+			repositoryURL = "https://github.com/plaid/plaid-link-ios-spm";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 6.0.4;
@@ -588,9 +605,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		C799EF8C2D61466600F2DE78 /* LinkKit */ = {
+		C79552B12D6185BE00B7F74B /* LinkKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C799EF8A2D61406A00F2DE78 /* XCRemoteSwiftPackageReference "plaid-link-ios" */;
+			package = C79552B02D6185A200B7F74B /* XCRemoteSwiftPackageReference "plaid-link-ios-spm" */;
 			productName = LinkKit;
 		};
 /* End XCSwiftPackageProductDependency section */
