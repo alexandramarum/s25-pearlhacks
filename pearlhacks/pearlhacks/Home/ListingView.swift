@@ -8,8 +8,29 @@
 import SwiftUI
 
 struct ListingView: View {
+    @State var vm: ListingViewModel = ListingViewModel()
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            List {
+                ForEach(vm.listings) { listing in
+                    VStack {
+                        Text(listing.street ?? "No street found")
+                        Text(listing.town ?? "No city found")
+                        Text(listing.price.description)
+                    }
+                }
+            }
+            Button {
+                do {
+                    try vm.getListings(zip: 27707)
+                } catch {
+                    print("Not working")
+                }
+            } label: {
+                Text("Fetch listings")
+            }
+        }
     }
 }
 
