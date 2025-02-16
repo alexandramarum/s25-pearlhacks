@@ -95,7 +95,7 @@ struct PlaidLoginView: View {
                 }
             } else {
                 // Bank connected and we have plaidAccessToken—display financial data.
-                ProfileView(
+                ProfileView(profile: Profile(
                     username: username,
                     balance: balance,
                     creditCardDebt: creditCardDebt,
@@ -104,6 +104,7 @@ struct PlaidLoginView: View {
                     debt: debt,
                     maxLoanApproval: maxLoanApproval
                 )
+                             )
                 .onAppear {
                     fetchAllFinancialData()
                 }

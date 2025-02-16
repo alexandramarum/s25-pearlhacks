@@ -1,7 +1,6 @@
 import SwiftUI
 
-struct ProfileView: View {
-    // MARK: - Properties
+struct Profile {
     let username: String
     let balance: String
     let creditCardDebt: String
@@ -9,7 +8,10 @@ struct ProfileView: View {
     let studentLoanDebt: String
     let debt: String
     let maxLoanApproval: String
-    
+}
+
+struct ProfileView: View {
+    let profile: Profile
     // MARK: - Body
     var body: some View {
         ScrollView {
@@ -18,12 +20,12 @@ struct ProfileView: View {
                 // MARK: - Header (Email + Greeting)
                 VStack(alignment: .leading, spacing: 4) {
                     // Lighter gray email text
-                    Text("\(username.lowercased())@gmail.com")
+                    Text("\(profile.username.lowercased())@gmail.com")
                         .foregroundColor(.gray)
                         .font(.subheadline)
                     
                     // Bold greeting
-                    Text("Hello, \(username.capitalized)!")
+                    Text("Hello, \(profile.username.capitalized)!")
                         .font(.largeTitle)
                         .bold()
                 }
@@ -45,42 +47,42 @@ struct ProfileView: View {
                     FinancialDataTileView(
                         backgroundColor: Color("loangreen").opacity(0.7),
                         title: "Balance",
-                        value: balance,
+                        value: profile.balance,
                         iconName: "dollarsign.circle"
                     )
                     
                     FinancialDataTileView(
                         backgroundColor: Color("loanlightgray"),
                         title: "Credit Card",
-                        value: creditCardDebt,
+                        value: profile.creditCardDebt,
                         iconName: "creditcard.fill"
                     )
                     
                     FinancialDataTileView(
                         backgroundColor: Color("loanblue").opacity(0.7),
                         title: "Mortgage",
-                        value: mortgageDebt,
+                        value: profile.mortgageDebt,
                         iconName: "house.fill"
                     )
                     
                     FinancialDataTileView(
                         backgroundColor: Color("loanorange").opacity(0.7),
                         title: "Student Loan",
-                        value: studentLoanDebt,
+                        value: profile.studentLoanDebt,
                         iconName: "graduationcap.fill"
                     )
                     
                     FinancialDataTileView(
                         backgroundColor: Color("loan gray"),
                         title: "Total Debt",
-                        value: debt,
+                        value: profile.debt,
                         iconName: "minus.circle.fill"
                     )
                     
                     FinancialDataTileView(
                         backgroundColor: Color("loanyellow").opacity(0.7),
                         title: "Max Loan",
-                        value: maxLoanApproval,
+                        value: profile.maxLoanApproval,
                         iconName: "checkmark.seal.fill"
                     )
                 }
@@ -132,7 +134,7 @@ struct ProfileView: View {
 // MARK: - Preview
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView(
+        ProfileView(profile: Profile(
             username: "Alex",
             balance: "$1,234.56",
             creditCardDebt: "$200.00",
@@ -140,6 +142,7 @@ struct ProfileView_Previews: PreviewProvider {
             studentLoanDebt: "$400.00",
             debt: "$900.00",
             maxLoanApproval: "$5,000.00"
+            )
         )
     }
 }
