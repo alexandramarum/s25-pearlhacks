@@ -29,7 +29,7 @@ struct ListingCardView: View {
                         }
                     }
                     Text("\(listing.street ?? "No street"), \(listing.town ?? "No town")")
-                    Text("$" + listing.mortgage.description + "/mo")
+//                    Text("$" + listing.mortgage.description + "/mo")
                 }
                 Spacer()
             }

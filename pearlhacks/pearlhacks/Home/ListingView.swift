@@ -26,13 +26,13 @@ struct ListingView: View {
             }
             .onAppear {
                 vm.filteredListings = vm.listings
-//                Task {
-//                    do {
-//                        try await vm.getListings(zip: 27707)
-//                    } catch {
-//                        print("Cannot get listings: \(error)")
-//                    }
-//                }
+                Task {
+                    do {
+                        try await vm.getListings(zip: 27707)
+                    } catch {
+                        print("Cannot get listings: \(error)")
+                    }
+                }
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {

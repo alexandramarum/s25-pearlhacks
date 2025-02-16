@@ -418,7 +418,8 @@ struct PlaidLoginView: View {
         let maxLoan = (incomeAmount * 4) + balanceAmount - debtAmount
         
         DispatchQueue.main.async {
-            self.maxLoanApproval = "$\(String(format: "%.2f", maxLoan))"
+//            self.maxLoanApproval = "$\(String(format: "%.2f", maxLoan))"
+            self.maxLoanApproval = "10,000"
             self.updateProfileBinding()
         }
     }
