@@ -33,7 +33,9 @@ struct ListingCardView: View {
                 .scaledToFit()
                 .shadow(radius: 5)
             HStack(spacing: 20) {
-                Button {} label: {
+                Button {
+                    
+                } label: {
                     Image(systemName: "heart")
                         .font(.largeTitle)
                         .frame(width: 100, height: 50)
@@ -52,7 +54,9 @@ struct ListingCardView: View {
             }
             .padding()
         }
-        .background(in: RoundedRectangle(cornerRadius: 20.0))
+        .background(Color.white
+            .shadow(color: Color.gray.opacity(0.5), radius: 5)
+        )
     }
 }
 

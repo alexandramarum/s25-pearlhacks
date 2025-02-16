@@ -9,29 +9,34 @@ import SwiftUI
 
 struct ListingView: View {
     @State var vm: ListingViewModel = .init()
-
+    @State var searchText: String = ""
+    
     var body: some View {
-        ZStack {
-//            Color.gray
-//                .opacity(0.1)
-//                .ignoresSafeArea()
-            VStack {
-                ScrollView {
+        NavigationStack {
+            ScrollView {
+                VStack {
                     ForEach(vm.listings) { listing in
                         ListingCardView(listing: listing)
-                            .shadow(radius: 5)
                     }
                 }
-                Spacer()
-                Button {
-                    do {
-                        try vm.getListings(zip: 27516)
-                    } catch {
-                        print("Not working")
+            }
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button(action: {
+                        // Add filter action here
+                    }) {
+                        Image(systemName: "line.3.horizontal.decrease.circle")
+                            .font(.title2)
                     }
-                } label: {
-                    Text("Fetch listings")
                 }
+            }
+        }
+        .searchable(text: $searchText)
+        .onAppear {
+            do {
+                try vm.getListings(zip: 27707)
+            } catch {
+                print("Cannot get listings: \(error)")
             }
         }
     }
