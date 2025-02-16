@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		C799EF8D2D61466600F2DE78 /* LinkKit in Frameworks */ = {isa = PBXBuildFile; productRef = C799EF8C2D61466600F2DE78 /* LinkKit */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		F867AC412D61171D002342F6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C799EF8D2D61466600F2DE78 /* LinkKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,12 +77,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C799EF8B2D61466600F2DE78 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		F867AC272D61171A002342F6 = {
 			isa = PBXGroup;
 			children = (
 				F867AC322D61171A002342F6 /* pearlhacks */,
 				F867AC432D61171D002342F6 /* pearlhacksTests */,
 				F867AC4D2D61171D002342F6 /* pearlhacksUITests */,
+				C799EF8B2D61466600F2DE78 /* Frameworks */,
 				F867AC312D61171A002342F6 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -112,6 +125,7 @@
 			);
 			name = pearlhacks;
 			packageProductDependencies = (
+				C799EF8C2D61466600F2DE78 /* LinkKit */,
 			);
 			productName = pearlhacks;
 			productReference = F867AC302D61171A002342F6 /* pearlhacks.app */;
@@ -572,6 +586,14 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C799EF8C2D61466600F2DE78 /* LinkKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C799EF8A2D61406A00F2DE78 /* XCRemoteSwiftPackageReference "plaid-link-ios" */;
+			productName = LinkKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F867AC282D61171A002342F6 /* Project object */;
 }
