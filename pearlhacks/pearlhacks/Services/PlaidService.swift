@@ -96,12 +96,19 @@ struct PlaidLoginView: View {
                     }
             } else if plaidAccessToken == nil {
                 // User is logged in and link token exists, but bank hasn't been connected yet.
-                Button(action: openPlaidLink) {
-                    Text("Connect Your Bank")
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(Color.green)
-                        .cornerRadius(8)
+                VStack {
+                    Image(.nest)
+                        .resizable()
+                        .scaledToFit()
+                    Button(action: openPlaidLink) {
+                        Text("Connect Your Bank")
+                            .font(.headline)
+                            .foregroundStyle(.white)
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(Color.accentColor)
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                    }
                 }
             } else {
                 // Bank connected and we have plaidAccessToken—display financial data.
