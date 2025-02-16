@@ -296,4 +296,3 @@ struct PlaidLoginView: View {
 #Preview {
     PlaidLoginView()
 }
-
