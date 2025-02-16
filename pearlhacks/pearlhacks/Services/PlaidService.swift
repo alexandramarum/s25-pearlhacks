@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+class PlaidService {
+    
+    var linkConfiguration = LinkTokenConfiguration(
+        
+    )
+}

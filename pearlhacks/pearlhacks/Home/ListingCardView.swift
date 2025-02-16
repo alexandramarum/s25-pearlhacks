@@ -8,13 +8,6 @@
 import SwiftUI
 
 struct ListingCardView: View {
-    //let Home home Object where you can use the object to get the properties.
-    let homeImages = ["home1", "home2", "home3"]
-    let homePrice = "150,000"
-    let homeAddress = "495 Paul Hardin Drive, Chapel Hill, NC, 27514"
-    let homeURL = URL(string: "https://www.google.com/")!
-    var withinRage: Bool = true;
-    @State var isExpanding: Bool = false;
     var body: some View {
         ZStack{
             VStack(spacing: 5) {
@@ -68,17 +61,6 @@ struct ListingCardView: View {
         }
     }
 }
-
-//PASS in an Home object
-func addHome() {
-    
-}
-
-
-
-
-
-
 
 #Preview {
     ListingCardView()
