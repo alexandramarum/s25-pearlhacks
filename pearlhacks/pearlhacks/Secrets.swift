@@ -6,5 +6,5 @@
 //
 
 class Secrets {
-    static var realEstateKey: String = "d79745b293478f66b102a47ce26c3a61"
+    static var realEstateKey: String = "3c5bccd8bb685b2e0bc19efb2d347274"
 }
