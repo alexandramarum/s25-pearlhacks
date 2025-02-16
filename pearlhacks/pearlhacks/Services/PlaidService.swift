@@ -41,9 +41,17 @@ struct PlaidLoginView: View {
         VStack {
             if userToken == nil {
                 // Show Login Screen
-                Text("Login to Your Account")
-                    .font(.largeTitle)
-                    .padding()
+                
+                Image("NestLetter")
+                    .shadow(radius: 3)
+                Image("Nest")
+                    .resizable()
+                    .scaledToFit()
+                    .shadow(radius: 2)
+                Text("Login")
+                    .font(.title2)
+                    .foregroundColor(Color.accentColor).opacity(0.8)
+                    //.padding()
                 TextField("Username", text: $username)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
@@ -56,8 +64,9 @@ struct PlaidLoginView: View {
                 Button(action: loginUser) {
                     Text("Login")
                         .foregroundColor(.white)
-                        .padding()
-                        .background(Color.blue)
+                        .padding(.horizontal, 32)
+                        .padding(.vertical, 10)
+                        .background(Color.accentColor)
                         .cornerRadius(8)
                 }
                 .padding(.bottom, 8)
@@ -66,11 +75,13 @@ struct PlaidLoginView: View {
                     showRegisterSheet.toggle()
                 }) {
                     Text("Register")
-                        .foregroundColor(.blue)
+                        .foregroundColor(.accentColor)
                 }
                 .sheet(isPresented: $showRegisterSheet) {
                     RegisterView()
                 }
+                .padding()
+                
             } else if linkToken == nil {
                 // User is logged in but Plaid link token isn't fetched yet.
                 ProgressView("Fetching Plaid Link Token...")

@@ -52,7 +52,7 @@ struct ListingCardView: View {
                         .frame(width: 100, height: 50)
                         .background(in: RoundedRectangle(cornerRadius: 20.0))
                         .shadow(radius: 5)
-                        .foregroundStyle(.black)
+                        .foregroundStyle(Color.accentColor)
                 }
             }
             .padding()

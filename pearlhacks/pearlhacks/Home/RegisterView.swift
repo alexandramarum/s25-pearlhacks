@@ -15,9 +15,12 @@ struct RegisterView: View {
     
     var body: some View {
         VStack {
-            Text("Create a New Account")
+            Text("Create New Account")
                 .font(.largeTitle)
                 .padding()
+                .foregroundColor(Color.accentColor)
+                .bold()
+                .shadow(radius: 1.5)
             
             TextField("Username", text: $newUsername)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -34,11 +37,15 @@ struct RegisterView: View {
                 Text("Register")
                     .foregroundColor(.white)
                     .padding()
-                    .background(Color.blue)
+                    .background(Color.accentColor)
                     .cornerRadius(8)
             }
             
             Spacer()
+            Image("Nest")
+                .resizable()
+                .scaledToFit()
+                .shadow(radius: 1)
         }
         .padding()
     }
