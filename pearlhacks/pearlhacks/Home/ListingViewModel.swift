@@ -32,6 +32,7 @@ class ListingViewModel {
                 let randomListing = generateRandomListing()
                 let newListing = Listing(
                     image: randomListing.image,
+                    zipcode: property.address.matchCode ?? "Not available",
                     street: property.address.line1,
                     town: property.address.line2,
                     price: randomListing.price,

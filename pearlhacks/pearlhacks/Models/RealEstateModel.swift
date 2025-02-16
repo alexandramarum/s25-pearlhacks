@@ -11,6 +11,7 @@ import Foundation
 struct Listing: Identifiable {
     let id = UUID()
     let image: String
+    let zipcode: String
     let street: String?
     let town: String?
     let price: Int
@@ -25,11 +26,11 @@ struct Listing: Identifiable {
 
 extension Listing {
     static var examples: [Listing] = [
-        Listing(image: "image1", street: "3905 Wentworth Ave", town: "Wilmington", price: 200000, mortgage: 1000, bathsfull: 2, bathspartial: 1, bathstotal: 3, beds: 3, rooms: 3),
-        Listing(image: "image6", street: "5555 Total Rd", town: "Old Salem", price: 350000, mortgage: 1344, bathsfull: 2, bathspartial: 1, bathstotal: 3, beds: 3, rooms: 3),
-        Listing(image: "image3", street: "4000 Wentworth Dr", town: "Old Salem", price: 500000, mortgage: 1313, bathsfull: 2, bathspartial: 1, bathstotal: 3, beds: 3, rooms: 3),
-        Listing(image: "image4", street: "3905 Wentworth Ave", town: "Old Salem", price: 350000, mortgage: 355, bathsfull: 2, bathspartial: 1, bathstotal: 3, beds: 3, rooms: 3),
-        Listing(image: "image5", street: "3905 Wentworth Ave", town: "Old Salem", price: 293000, mortgage: 324, bathsfull: 2, bathspartial: 1, bathstotal: 3, beds: 3, rooms: 3)]
+        Listing(image: "image1", zipcode: "27707", street: "3905 Wentworth Ave", town: "Wilmington", price: 200000, mortgage: 1000, bathsfull: 2, bathspartial: 1, bathstotal: 3, beds: 3, rooms: 3),
+        Listing(image: "image6", zipcode: "27707", street: "5555 Total Rd", town: "Old Salem", price: 350000, mortgage: 1344, bathsfull: 2, bathspartial: 1, bathstotal: 3, beds: 3, rooms: 3),
+        Listing(image: "image3", zipcode: "27707", street: "4000 Wentworth Dr", town: "Old Salem", price: 500000, mortgage: 1313, bathsfull: 2, bathspartial: 1, bathstotal: 3, beds: 3, rooms: 3),
+        Listing(image: "image4", zipcode: "27707", street: "3905 Wentworth Ave", town: "Old Salem", price: 350000, mortgage: 355, bathsfull: 2, bathspartial: 1, bathstotal: 3, beds: 3, rooms: 3),
+        Listing(image: "image5", zipcode: "27707", street: "3905 Wentworth Ave", town: "Old Salem", price: 293000, mortgage: 324, bathsfull: 2, bathspartial: 1, bathstotal: 3, beds: 3, rooms: 3)]
 }
 
 // Random Listing

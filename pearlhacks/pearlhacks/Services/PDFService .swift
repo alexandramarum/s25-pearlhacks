@@ -20,7 +20,7 @@ struct PDFService_: View {
 
     func render() -> URL {
         let renderer = ImageRenderer(content:
-            PreApprovalLetterView()
+                                        PreApprovalLetterView(listing: Listing.examples[0])
             .frame(width: 612, height: 792)
         )
 
