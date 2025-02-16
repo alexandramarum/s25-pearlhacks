@@ -10,6 +10,9 @@ import SwiftUI
 struct ListingCardView: View {
     @Binding var listing: Listing
     @State var showDetails: Bool = false
+    var profile: Profile
+    var vm: ListingCardViewModel = ListingCardViewModel()
+
 
     var body: some View {
         NavigationStack {
@@ -19,12 +22,14 @@ struct ListingCardView: View {
                         Text("$" + listing.price.description)
                             .font(.largeTitle)
                             .bold()
-                        Image(systemName: "checkmark.seal.fill")
-                            .foregroundColor(Color.accent)
-                            .font(.title2)
+                        if vm.hasBadge(for: listing, profile: profile) {
+                            Image(systemName: "checkmark.seal.fill")
+                                .foregroundColor(Color.accent)
+                                .font(.title2)
+                        }
                     }
                     Text("\(listing.street ?? "No street"), \(listing.town ?? "No town")")
-                    //                Text("$" + listing.mortgage.description + "/mo")
+//                    Text("$" + listing.mortgage.description + "/mo")
                 }
                 Spacer()
             }
@@ -85,6 +90,6 @@ struct showDetailsView: View {
 }
 
 #Preview {
-    ListingCardView(listing: .constant(Listing.examples[1]))
+    ListingCardView(listing: .constant(Listing.examples[1]), profile: Profile.example)
 //    CustomButton(icon: "plus", color: .accent)
 }

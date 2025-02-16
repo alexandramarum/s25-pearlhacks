@@ -22,6 +22,7 @@ struct Listing: Identifiable {
     let beds: Int
     let rooms: Int
     var isSaved: Bool = false
+    var hasBadge: Bool = false
 }
 
 extension Listing {
