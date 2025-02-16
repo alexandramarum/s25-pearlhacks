@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ListingCardView: View {
-    var listing: Listing
+    @Binding var listing: Listing
 
     var body: some View {
         VStack {
@@ -34,16 +34,18 @@ struct ListingCardView: View {
                 .shadow(radius: 5)
             HStack(spacing: 20) {
                 Button {
-                    
+                    listing.isSaved.toggle()
                 } label: {
-                    Image(systemName: "heart")
+                    Image(systemName: listing.isSaved ? "heart.fill" : "heart")
                         .font(.largeTitle)
                         .frame(width: 100, height: 50)
                         .background(in: RoundedRectangle(cornerRadius: 20.0))
                         .shadow(radius: 5)
                         .foregroundStyle(.red)
                 }
-                Button {} label: {
+                Button {
+                    
+                } label: {
                     Image(systemName: "ellipsis.circle")
                         .font(.largeTitle)
                         .frame(width: 100, height: 50)
@@ -61,6 +63,6 @@ struct ListingCardView: View {
 }
 
 #Preview {
-    ListingCardView(listing: Listing.example)
+    ListingCardView(listing: .constant(Listing.examples[0]))
 //    CustomButton(icon: "plus", color: .accent)
 }

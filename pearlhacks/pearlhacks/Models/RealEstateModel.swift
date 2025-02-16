@@ -5,11 +5,10 @@
 //  Created by Alexandra Marum on 2/15/25.
 //
 
-
 import Foundation
 
 // Listing
-struct Listing: Codable, Identifiable {
+struct Listing: Identifiable {
     let id = UUID()
     let image: String
     let street: String?
@@ -21,10 +20,16 @@ struct Listing: Codable, Identifiable {
     let bathstotal: Int
     let beds: Int
     let rooms: Int
+    var isSaved: Bool = false
 }
 
 extension Listing {
-    static var example: Listing = Listing(image: "image1", street: "3905 Wentworth Ave", town: "Old Salem", price: 350000, mortgage: 10000, bathsfull: 2, bathspartial: 1, bathstotal: 3, beds: 3, rooms: 3)
+    static var examples: [Listing] = [
+        Listing(image: "image1", street: "3905 Wentworth Ave", town: "Wilmington", price: 200000, mortgage: 1000, bathsfull: 2, bathspartial: 1, bathstotal: 3, beds: 3, rooms: 3),
+        Listing(image: "image6", street: "5555 Total Rd", town: "Old Salem", price: 350000, mortgage: 1344, bathsfull: 2, bathspartial: 1, bathstotal: 3, beds: 3, rooms: 3),
+        Listing(image: "image3", street: "4000 Wentworth Dr", town: "Old Salem", price: 500000, mortgage: 1313, bathsfull: 2, bathspartial: 1, bathstotal: 3, beds: 3, rooms: 3),
+        Listing(image: "image4", street: "3905 Wentworth Ave", town: "Old Salem", price: 350000, mortgage: 355, bathsfull: 2, bathspartial: 1, bathstotal: 3, beds: 3, rooms: 3),
+        Listing(image: "image5", street: "3905 Wentworth Ave", town: "Old Salem", price: 293000, mortgage: 324, bathsfull: 2, bathspartial: 1, bathstotal: 3, beds: 3, rooms: 3)]
 }
 
 // Random Listing
@@ -38,6 +43,7 @@ struct RandomListing {
     let beds: Int
     let rooms: Int
 }
+
 // Fetch properties by zip
 struct AllProperties: Codable {
     let property: [Property]
@@ -65,49 +71,49 @@ struct Identifier: Codable {
 }
 
 //// Fetch property details
-//struct PropertyDetails: Codable {
+// struct PropertyDetails: Codable {
 //    let property: [DetailedProperty]
-//}
+// }
 //
-//struct DetailedProperty: Codable {
+// struct DetailedProperty: Codable {
 //    let identifier: Identifier?
 //    let address: DetailedAddress?
 //    let location: Location?
 //    let building: Building?
 //    let mortgage: Mortgage?
-//}
+// }
 //
-//struct Building: Codable {
+// struct Building: Codable {
 //    let rooms: Rooms
-//}
+// }
 //
-//struct Rooms: Codable {
+// struct Rooms: Codable {
 //    let bathsfull, bathspartial, bathstotal, beds: Int
 //    let roomsTotal: Int
-//}
+// }
 //
-//struct DetailedAddress: Codable {
+// struct DetailedAddress: Codable {
 //    let country, countrySubd, line1, line2: String?
 //    let locality, matchCode, oneLine, postal1: String?
 //    let postal2, postal3: String?
-//}
+// }
 //
-//struct Location: Codable {
+// struct Location: Codable {
 //    let accuracy, latitude, longitude: String?
 //    let distance: Int?
 //
 //    enum CodingKeys: String, CodingKey {
 //        case accuracy, latitude, longitude, distance
 //    }
-//}
+// }
 //
-//struct Mortgage: Codable {
+// struct Mortgage: Codable {
 //    let lender: Lender?
 //    let amount: Int?
 //    let date, deedtype, duedate, interestratetype: String?
-//}
+// }
 //
-//struct Lender: Codable {
+// struct Lender: Codable {
 //    let lastname, companycode: String?
-//}
+// }
 //
