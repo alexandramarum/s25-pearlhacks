@@ -11,17 +11,18 @@ struct ContentView: View {
     var body: some View {
         TabView {
             Tab("Profile", systemImage: "person") {
-                    Text("Profile")
-                }
+                Text("Profile")
+            }
             Tab("Listings", systemImage: "house") {
-                    ListingView()
-                }
+                ListingView()
+            }
         }
         .onAppear {
             UITabBar.appearance().barTintColor = .white
         }
         .ignoresSafeArea()
     }
+}
 
 #Preview {
     ContentView()
