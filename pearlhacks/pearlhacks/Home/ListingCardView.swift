@@ -8,10 +8,77 @@
 import SwiftUI
 
 struct ListingCardView: View {
+    //let Home home Object where you can use the object to get the properties.
+    let homeImages = ["home1", "home2", "home3"]
+    let homePrice = "150,000"
+    let homeAddress = "495 Paul Hardin Drive, Chapel Hill, NC, 27514"
+    let homeURL = URL(string: "https://www.google.com/")!
+    var withinRage: Bool = true;
+    @State var isExpanding: Bool = false;
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack{
+            VStack(spacing: 5) {
+                Image(homeImages[0])
+                    .resizable()
+                    .cornerRadius(30)
+                    .padding(20)
+                HStack{
+                    Text("$"+homePrice)
+                        .font(.system(size: 35, weight: .bold, design: .default))
+                    
+                    Image(systemName: withinRage ? "checkmark.seal.fill": "checkmark.seal")
+                        .foregroundColor(Color("AppOrange"))
+                }.padding(.trailing, 140)
+                
+                Text(homeAddress)
+                    .font(.system(size: 25, weight: .regular, design: .default))
+                    .lineLimit(nil)
+                    .frame(width:360)
+                    .padding(.trailing, 5)
+                Link("View More", destination: homeURL)
+                //.foregroundColor(Color("AppOrange"))
+                    .font(.system(size: 15, weight: .bold))
+                    .padding(.trailing, 250)
+                Spacer()
+                
+                Button{
+                    //pass in the current home object
+                    addHome()
+                }label:{
+                    Image(systemName: "plus.diamond")
+                        .font(.system(size:50))
+                }
+                .padding(.top, 50)
+                .padding(.bottom, 100)
+                Button{
+                    isExpanding.toggle()
+                }label:{
+                    Image(systemName:"list.bullet")
+                        .font(.system(size:35))
+                }.padding(.trailing, 250)
+            }
+            
+            if isExpanding{
+                VStack{
+                    NavButtons()
+                        .transition(.slide)
+                }
+                
+            }
+        }
     }
 }
+
+//PASS in an Home object
+func addHome() {
+    
+}
+
+
+
+
+
+
 
 #Preview {
     ListingCardView()
