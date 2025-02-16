@@ -1,0 +1,21 @@
+# Ignore Python virtual environments
+venv/
+__pycache__/
+*.pyc
+
+# Ignore SQLite database files
+database.db
+*.sqlite3
+
+# Ignore environment variables (DO NOT PUSH SECRETS TO GITHUB)
+.env
+
+# Ignore log files
+*.log
+
+# Ignore Railway & deployment-related files
+.railway/
+.DS_Store
+
+# Ignore compiled files and cache
+*.egg-info/
