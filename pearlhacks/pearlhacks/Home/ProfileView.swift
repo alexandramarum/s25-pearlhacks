@@ -1,13 +1,25 @@
 import SwiftUI
 
 struct Profile {
-    let username: String
-    let balance: String
-    let creditCardDebt: String
-    let mortgageDebt: String
-    let studentLoanDebt: String
-    let debt: String
-    let maxLoanApproval: String
+    var username: String
+    var balance: String
+    var creditCardDebt: String
+    var mortgageDebt: String
+    var studentLoanDebt: String
+    var debt: String
+    var maxLoanApproval: String
+}
+
+extension Profile {
+    static let example = Profile(
+        username: "Alex",
+        balance: "$1,234.56",
+        creditCardDebt: "$200.00",
+        mortgageDebt: "$300.00",
+        studentLoanDebt: "$400.00",
+        debt: "$900.00",
+        maxLoanApproval: "$5,000.00"
+        )
 }
 
 struct ProfileView: View {
@@ -134,16 +146,7 @@ struct ProfileView: View {
 // MARK: - Preview
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView(profile: Profile(
-            username: "Alex",
-            balance: "$1,234.56",
-            creditCardDebt: "$200.00",
-            mortgageDebt: "$300.00",
-            studentLoanDebt: "$400.00",
-            debt: "$900.00",
-            maxLoanApproval: "$5,000.00"
-            )
-        )
+        ProfileView(profile: Profile.example)
     }
 }
 

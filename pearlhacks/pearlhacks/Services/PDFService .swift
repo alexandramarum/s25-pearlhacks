@@ -10,7 +10,7 @@ import SwiftUI
 
 struct PDFService_: View {
     @State private var pdfURL: URL?
-    //var listing: Listing
+    var listing: Listing
     var body: some View {
         ShareLink("Save Letter", item: render())
         PDFViewer(pdfURL: render())
@@ -20,7 +20,7 @@ struct PDFService_: View {
 
     func render() -> URL {
         let renderer = ImageRenderer(content:
-                                        PreApprovalLetterView(listing: Listing.examples[0])
+                                        PreApprovalLetterView(listing: listing)
             .frame(width: 612, height: 792)
         )
 
@@ -71,5 +71,5 @@ struct PDFViewer: UIViewRepresentable {
 }
 
 #Preview {
-    PDFService_()
+    PDFService_(listing: Listing.examples[0])
 }

@@ -9,9 +9,10 @@ import SwiftUI
 
 struct ListingCardView: View {
     @Binding var listing: Listing
+    @State var showDetails: Bool = false
 
     var body: some View {
-        VStack {
+        NavigationStack {
             HStack {
                 VStack(alignment: .leading) {
                     HStack {
@@ -44,7 +45,7 @@ struct ListingCardView: View {
                         .foregroundStyle(.red)
                 }
                 Button {
-                    
+                    showDetails.toggle()
                 } label: {
                     Image(systemName: "ellipsis.circle")
                         .font(.largeTitle)
@@ -55,6 +56,9 @@ struct ListingCardView: View {
                 }
             }
             .padding()
+            if showDetails {
+                showDetailsView(listing: listing)
+            }
         }
         .background(Color.white
             .shadow(color: Color.gray.opacity(0.5), radius: 5)
@@ -62,7 +66,25 @@ struct ListingCardView: View {
     }
 }
 
+struct showDetailsView: View {
+    var listing: Listing
+    
+    var body: some View {
+        NavigationLink(destination: PDFService_(listing: listing)) {
+            Text("Generate PDF")
+                .font(.headline)
+                .foregroundStyle(.white)
+                .padding()
+                .frame(maxWidth: .infinity)
+                .background(Color.accentColor)
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+        }
+        .padding(.bottom)
+        .padding(.horizontal)
+    }
+}
+
 #Preview {
-    ListingCardView(listing: .constant(Listing.examples[0]))
+    ListingCardView(listing: .constant(Listing.examples[1]))
 //    CustomButton(icon: "plus", color: .accent)
 }
