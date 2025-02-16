@@ -11,21 +11,27 @@ struct ListingView: View {
     @State var vm: ListingViewModel = .init()
 
     var body: some View {
-        VStack {
-            ScrollView {
-                ForEach(vm.listings) { listing in
-                    ListingCardView(listing: listing)
+        ZStack {
+//            Color.gray
+//                .opacity(0.1)
+//                .ignoresSafeArea()
+            VStack {
+                ScrollView {
+                    ForEach(vm.listings) { listing in
+                        ListingCardView(listing: listing)
+                            .shadow(radius: 5)
+                    }
                 }
-            }
-            Spacer()
-            Button {
-                do {
-                    try vm.getListings(zip: 27707)
-                } catch {
-                    print("Not working")
+                Spacer()
+                Button {
+                    do {
+                        try vm.getListings(zip: 27516)
+                    } catch {
+                        print("Not working")
+                    }
+                } label: {
+                    Text("Fetch listings")
                 }
-            } label: {
-                Text("Fetch listings")
             }
         }
     }
