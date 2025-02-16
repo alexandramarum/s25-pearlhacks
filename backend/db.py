@@ -1,10 +1,16 @@
 from sqlalchemy import create_engine, Column, Integer, String, Text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+import os
+from dotenv import load_dotenv
 
-# SQLite Database
-SQLALCHEMY_DATABASE_URL = "sqlite:///./database.db"
-engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False})
+load_dotenv()
+
+# Use Supabase Database URL
+SUPABASE_DB_URL = os.getenv("SUPABASE_DB_URL")
+
+# Create Database Engine
+engine = create_engine(SUPABASE_DB_URL)
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
@@ -17,6 +23,7 @@ class User(Base):
     password = Column(String)
     plaid_access_token = Column(Text, nullable=True)
 
+# Create Tables in Supabase
 Base.metadata.create_all(bind=engine)
 
 # Helper function to get database session

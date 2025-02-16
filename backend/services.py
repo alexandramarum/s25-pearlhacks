@@ -59,6 +59,50 @@ def create_plaid_link_token(db: Session, username: str):
     }).json()
     return response
 
-# Loan Pre-Approval Logic
-def loan_preapproval(db: Session, username: str):
-    return {"message": "Loan pre-approval logic coming soon!"}  # Placeholder
+# 🔹 Exchange Public Token for Access Token
+def exchange_public_token(db: Session, public_token: str, username: str):
+    """Exchanges public token for an access token and saves it in the database."""
+    response = requests.post(f"https://{PLAID_ENV}.plaid.com/item/public_token/exchange", json={
+        "client_id": PLAID_CLIENT_ID,
+        "secret": PLAID_SECRET,
+        "public_token": public_token
+    }).json()
+
+    access_token = response.get("access_token")
+    if not access_token:
+        return {"error": "Failed to exchange public token"}
+
+    # Save access_token for user
+    db_user = db.query(User).filter(User.username == username).first()
+    if db_user:
+        db_user.plaid_access_token = access_token
+        db.commit()
+
+    return {"message": "Plaid account linked successfully", "access_token": access_token}
+
+
+# 🔹 Fetch Account Balance & Determine Loan Pre-Approval
+def get_loan_preapproval(db: Session, username: str):
+    """Fetches financial data & calculates loan pre-approval."""
+    db_user = db.query(User).filter(User.username == username).first()
+    if not db_user or not db_user.plaid_access_token:
+        return {"error": "No Plaid account linked"}
+
+    # Fetch balance from Plaid
+    response = requests.post(f"https://{PLAID_ENV}.plaid.com/accounts/balance/get", json={
+        "client_id": PLAID_CLIENT_ID,
+        "secret": PLAID_SECRET,
+        "access_token": db_user.plaid_access_token
+    }).json()
+
+    balance = response["accounts"][0]["balances"]["available"]
+
+    # Loan approval logic
+    income = balance * 3  # Estimate income
+    debt = balance * 0.5   # Estimate debt
+    dti = (debt / max(1, income)) * 100
+
+    if dti < 35 and balance > 1000:
+        return {"approved": True, "approval_amount": income * 4, "message": "You are pre-approved!"}
+    else:
+        return {"approved": False, "message": "Not pre-approved. Try reducing debt."}
