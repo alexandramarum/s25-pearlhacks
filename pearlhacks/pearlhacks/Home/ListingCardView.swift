@@ -8,11 +8,25 @@
 import SwiftUI
 
 struct ListingCardView: View {
+    var listing: Listing
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(alignment: .leading) {
+            Image(listing.image)
+                .resizable()
+                .scaledToFill()
+                .frame(width: 375, height: 400)
+                .clipShape(RoundedRectangle(cornerRadius: 20.0))
+            Text("$\(listing.price.description)")
+                .bold()
+                .font(.largeTitle)
+            Text("$\(listing.mortgage.description)/mo")
+                .font(.title2)
+                .foregroundStyle(.secondary)
+        }
     }
 }
 
 #Preview {
-    ListingCardView()
+    ListingCardView(listing: Listing.example)
 }
