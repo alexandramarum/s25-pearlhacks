@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ContentView: View {
-    
     var body: some View {
         TabView {
             Tab("Profile", systemImage: "person") {
@@ -16,9 +15,6 @@ struct ContentView: View {
             }
             Tab("Listings", systemImage: "house") {
                 ListingView()
-            }
-            Tab("Saved", systemImage: "heart") {
-                SavedListingView()
             }
         }
         .onAppear {
