@@ -8,14 +8,23 @@
 import SwiftUI
 
 struct ContentView: View {
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        TabView {
+            Tab("Profile", systemImage: "person") {
+                    Text("Profile")
+                }
+            Tab("Listings", systemImage: "house") {
+                    ListingView()
+                }
+            Tab("Saved", systemImage: "heart") {
+                    SavedListingView()
+                }
         }
-        .padding()
+        .onAppear {
+            UITabBar.appearance().barTintColor = .white
+        }
+        .ignoresSafeArea()
     }
 }
 
