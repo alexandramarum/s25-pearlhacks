@@ -13,7 +13,7 @@ struct LoadingView: View {
     
     var body: some View {
         if isActive {
-            PlaidLoginView()
+            PlaidLoginView(state: .constant(.onboarded), profile: .constant(Profile.example))
         } else {
             ZStack {
                 // 1) Custom green background from Assets.xcassets

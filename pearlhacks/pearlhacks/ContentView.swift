@@ -7,20 +7,32 @@
 
 import SwiftUI
 
+enum AppState {
+    case notonboarded
+    case onboarded
+}
+
 struct ContentView: View {
+    @State var currentState: AppState = .notonboarded
+    @State var profile: Profile = Profile.example
+    
     var body: some View {
-        TabView {
-            Tab("Profile", systemImage: "person") {
-                Text("Profile")
+        if currentState == .notonboarded {
+            PlaidLoginView(state: $currentState, profile: $profile)
+        } else {
+            TabView {
+                Tab("Profile", systemImage: "person") {
+                    ProfileView(profile: profile)
+                }
+                Tab("Listings", systemImage: "house") {
+                    ListingView()
+                }
             }
-            Tab("Listings", systemImage: "house") {
-                ListingView()
+            .onAppear {
+                UITabBar.appearance().barTintColor = .white
             }
+            .ignoresSafeArea()
         }
-        .onAppear {
-            UITabBar.appearance().barTintColor = .white
-        }
-        .ignoresSafeArea()
     }
 }
 
