@@ -33,6 +33,9 @@ struct PlaidLoginView: View {
     @State private var maxLoanApproval: String = "Calculating..."
     
     @State private var handler: Handler? = nil
+    
+    // Controls whether to show the Register sheet
+    @State private var showRegisterSheet = false
 
     // MARK: - Body
     var body: some View {
@@ -61,6 +64,18 @@ struct PlaidLoginView: View {
                         .background(Color.blue)
                         .cornerRadius(8)
                 }
+                .padding(.bottom, 8)
+                
+                // Register button to open the RegisterView sheet
+                Button(action: {
+                    showRegisterSheet.toggle()
+                }) {
+                    Text("Register")
+                        .foregroundColor(.blue)
+                }
+                .sheet(isPresented: $showRegisterSheet) {
+                    RegisterView()
+                }
             } else if linkToken == nil {
                 // User is logged in but Plaid link token isn't fetched yet.
                 ProgressView("Fetching Plaid Link Token...")
@@ -80,24 +95,17 @@ struct PlaidLoginView: View {
                 }
             } else {
                 // Bank connected and we have plaidAccessToken—display financial data.
-                VStack {
-                    Text("Financial Data")
-                        .font(.largeTitle)
-                        .padding()
-                    Text("Balance: \(balance)")
-                    Text("Credit Card Debt: \(creditCardDebt)")
-                    Text("Mortgage Debt: \(mortgageDebt)")
-                    Text("Student Loan Debt: \(studentLoanDebt)")
-                    Text("Total Debt: \(debt)")
-                    Text("Max Loan Approved: \(maxLoanApproval)")
-                    
-                    Button(action: fetchAllFinancialData) {
-                        Text("Refresh Financial Data")
-                            .foregroundColor(.white)
-                            .padding()
-                            .background(Color.purple)
-                            .cornerRadius(8)
-                    }
+                ProfileView(
+                    username: username,
+                    balance: balance,
+                    creditCardDebt: creditCardDebt,
+                    mortgageDebt: mortgageDebt,
+                    studentLoanDebt: studentLoanDebt,
+                    debt: debt,
+                    maxLoanApproval: maxLoanApproval
+                )
+                .onAppear {
+                    fetchAllFinancialData()
                 }
             }
         }
@@ -203,7 +211,6 @@ struct PlaidLoginView: View {
     func fetchAllFinancialData() {
         fetchBalance()
         fetchLiabilities()
-        
     }
 
     /// Fetch account balance.
@@ -296,3 +303,5 @@ struct PlaidLoginView: View {
 #Preview {
     PlaidLoginView()
 }
+
+
