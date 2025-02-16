@@ -59,6 +59,7 @@ struct ListingCardView: View {
                         .shadow(radius: 5)
                         .foregroundStyle(Color.accentColor)
                 }
+                .disabled(!listing.hasBadge)
             }
             .padding()
             if showDetails {

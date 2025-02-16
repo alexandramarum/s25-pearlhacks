@@ -17,20 +17,22 @@ struct ListingView: View {
         NavigationStack {
             ScrollView {
                 VStack {
-                    ForEach($vm.listings, id: \.id) { $listing in
-                        ListingCardView(listing: $listing, profile: profile)
+                    var listings = vm.filterOn ? vm.filteredListings : vm.listings
+                    
+                    ForEach(listings.indices, id: \.self) { index in
+                        ListingCardView(listing: $vm.listings[index], profile: profile)
                     }
                 }
             }
             .onAppear {
                 vm.filteredListings = vm.listings
-                Task {
+//                Task {
 //                    do {
 //                        try await vm.getListings(zip: 27707)
 //                    } catch {
 //                        print("Cannot get listings: \(error)")
 //                    }
-                }
+//                }
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {

@@ -17,7 +17,7 @@ struct Filtered: Equatable {
 
 @Observable
 class ListingViewModel {
-    var listings: [Listing] = Listing.examples
+    var listings: [Listing] = []
     let images: [String] = ["image1", "image3", "image4", "image5", "image6", "image7", "image8", "image9", "image10"]
     var filteredListings: [Listing] = []
     
