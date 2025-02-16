@@ -8,19 +8,16 @@
 import SwiftUI
 
 struct ListingView: View {
-    @State var vm: ListingViewModel = ListingViewModel()
-    
+    @State var vm: ListingViewModel = .init()
+
     var body: some View {
         VStack {
-            List {
+            ScrollView {
                 ForEach(vm.listings) { listing in
-                    VStack {
-                        Text(listing.street ?? "No street found")
-                        Text(listing.town ?? "No city found")
-                        Text(listing.price.description)
-                    }
+                    ListingCardView(listing: listing)
                 }
             }
+            Spacer()
             Button {
                 do {
                     try vm.getListings(zip: 27707)

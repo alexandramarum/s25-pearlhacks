@@ -8,60 +8,30 @@
 import SwiftUI
 
 struct ListingCardView: View {
+    var listing: Listing
+
     var body: some View {
-        ZStack{
-            VStack(spacing: 5) {
-                Image(homeImages[0])
-                    .resizable()
-                    .cornerRadius(30)
-                    .padding(20)
-                HStack{
-                    Text("$"+homePrice)
-                        .font(.system(size: 35, weight: .bold, design: .default))
-                    
-                    Image(systemName: withinRage ? "checkmark.seal.fill": "checkmark.seal")
-                        .foregroundColor(Color("AppOrange"))
-                }.padding(.trailing, 140)
-                
-                Text(homeAddress)
-                    .font(.system(size: 25, weight: .regular, design: .default))
-                    .lineLimit(nil)
-                    .frame(width:360)
-                    .padding(.trailing, 5)
-                Link("View More", destination: homeURL)
-                //.foregroundColor(Color("AppOrange"))
-                    .font(.system(size: 15, weight: .bold))
-                    .padding(.trailing, 250)
-                Spacer()
-                
-                Button{
-                    //pass in the current home object
-                    addHome()
-                }label:{
-                    Image(systemName: "plus.diamond")
-                        .font(.system(size:50))
+        VStack {
+            Image(listing.image)
+                .resizable()
+                .scaledToFit()
+            VStack(alignment: .leading) {
+                HStack {
+                    Text("$" + listing.price.description)
+                        .font(.title)
+                        .bold()
+                    Image(systemName: "checkmark.seal.fill")
+                        .foregroundColor(Color.accent)
+                        .font(.title2)
                 }
-                .padding(.top, 50)
-                .padding(.bottom, 100)
-                Button{
-                    isExpanding.toggle()
-                }label:{
-                    Image(systemName:"list.bullet")
-                        .font(.system(size:35))
-                }.padding(.trailing, 250)
-            }
-            
-            if isExpanding{
-                VStack{
-                    NavButtons()
-                        .transition(.slide)
-                }
-                
+                Text("\(listing.street ?? "No street"), \(listing.town ?? "No town")")
+                    .font(.title3)
             }
         }
+        .background(.secondary.opacity(0.15), in: RoundedRectangle(cornerRadius: 20.0))
     }
 }
 
 #Preview {
-    ListingCardView()
+    ListingCardView(listing: Listing.example)
 }
