@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct PreApprovalLetterView: View {
-    //var listing: Listing
+    var listing: Listing
+    var loan: Int = 55
+    
     var body: some View {
         // ScrollView {
         VStack(alignment: .leading, spacing: 10) {
@@ -35,7 +37,7 @@ struct PreApprovalLetterView: View {
                     .foregroundColor(Color("AppGreen"))
                        
                 Text("Address: 145 E. Cameron Street")
-                Text("City, State:Chapel Hill, NC")
+                Text("City, State: Chapel Hill, NC")
                 Text("Zip: 27514")
             }
                    
@@ -60,19 +62,19 @@ struct PreApprovalLetterView: View {
                 HStack {
                     Text("Property Address: ")
                         .bold()
-                    Text("12 Stuart Street, Sudbury, Massachusetts, 01776")
+                    Text("\(listing.street ?? "unknown"), \(listing.town ?? "unknown") \(listing.zipcode)")
                         .foregroundColor(Color("AppGreen"))
                 }
                 HStack {
                     Text("Sales Price: ")
                         .bold()
-                    Text("$800,000.00")
+                    Text("$\(listing.price)")
                         .foregroundColor(Color("AppGreen"))
                 }
                 HStack {
                     Text("Loan Amount: ")
                         .bold()
-                    Text("$640,000.00")
+                    Text("$\(loan)")
                         .foregroundColor(Color("AppGreen"))
                 }
                 HStack {
@@ -133,5 +135,5 @@ struct CheckBoxText: View {
 }
 
 #Preview {
-    PreApprovalLetterView()
+    PreApprovalLetterView(listing: Listing.examples[0])
 }
