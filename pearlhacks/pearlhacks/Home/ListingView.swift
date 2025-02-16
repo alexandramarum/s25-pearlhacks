@@ -12,14 +12,13 @@ struct ListingView: View {
 
     var body: some View {
         ZStack {
-//            Color.gray
-//                .opacity(0.1)
-//                .ignoresSafeArea()
+            Color.gray
+                .opacity(0.1)
+                .ignoresSafeArea()
             VStack {
                 ScrollView {
                     ForEach(vm.listings) { listing in
                         ListingCardView(listing: listing)
-                            .shadow(radius: 5)
                     }
                 }
                 Spacer()
